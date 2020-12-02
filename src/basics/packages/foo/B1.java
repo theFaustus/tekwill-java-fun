@@ -1,6 +1,6 @@
 package basics.packages.foo;
 
-import basics.packages.bar.Foo;
+import basics.packages.bar.A;
 
 /*
  * This is an example class 234534dfg"£$%"£$
@@ -8,18 +8,20 @@ import basics.packages.bar.Foo;
 
 /**
  * Class Bar does nothing
+ *
  * @author ipascari
  */
-public class Bar {
+public class B1 {
     /**
      * Field that does nothing
      */
-    Foo foo; //This is an instance variable
+    A instanceVariable; //This is an instance variable
+    basics.packages.nan.A anotherInstanceVariable;
 
     /**
      *
      */
-    public void nothing(){
+    public void checkPublic() {
 
     }
 
@@ -27,7 +29,7 @@ public class Bar {
      * @param s needed for something
      * @return needed for something
      */
-    public Integer nothing(String s){
+    public Integer nothing(String s) {
         return null;
     }
 

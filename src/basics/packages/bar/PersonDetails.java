@@ -14,7 +14,7 @@ class PersonDetails {
         this.name = name;
     }
 
-    public void nothing(){
+    public void checkPublic() {
         //var b = "nanana";
     }
 
