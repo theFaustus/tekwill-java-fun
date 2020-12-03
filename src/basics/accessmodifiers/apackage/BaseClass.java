@@ -2,21 +2,22 @@ package basics.accessmodifiers.apackage;
 
 public class BaseClass {
     public String publicInstanceField;
-    public String protectedInstanceField;
-    public String defaultInstanceField;
-    public String privateInstanceField;
+    protected String protectedInstanceField;
+    String defaultInstanceField;
+    private String privateInstanceField;
+
     private BaseClass baseClass;
 
     public void publicMethod() {
     }
 
-    public void protectedMethod() {
+    protected void protectedMethod() {
     }
 
-    public void defaultMethod() {
+    void defaultMethod() {
     }
 
-    public void privateMethod() {
+    private void privateMethod() {
     }
 
     public void checkPublic() {
