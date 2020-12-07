@@ -5,19 +5,17 @@ public class Book { // can be package-private/default also, accessible just insi
     public String publicIsbn;
     //protected access modifier
     protected String protectedIsbn;
-    ;
+
     //default(package-private) access modifier
     String defaultIsbn;
     //private access modifier
     private String privateIsbn;
-    ;
+
     private Book book;
 
     public Book publicPrint() {
         return new Book();
     }
-
-    ;
 
     protected Book protectedPrint() {
         return new Book();
@@ -26,8 +24,6 @@ public class Book { // can be package-private/default also, accessible just insi
     Book defaultPrint() {
         return new Book();
     }
-
-    ;
 
     private Book privatePrint() {
         return new Book();
