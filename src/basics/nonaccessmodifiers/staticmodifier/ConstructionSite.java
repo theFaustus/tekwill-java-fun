@@ -1,5 +1,6 @@
 package basics.nonaccessmodifiers.staticmodifier;
 
+
 import static basics.nonaccessmodifiers.staticmodifier.House.companyName;
 
 public class ConstructionSite {
@@ -20,16 +21,17 @@ public class ConstructionSite {
 
         companyName = "GConstructor"; //access static/class members via class reference
         House.staticMethod(); //access static/class members via class reference
-        System.out.println(companyName); //always use class name
+        System.out.println(companyName);
 
         System.out.println(h2);
-        System.out.println(companyName);
+        System.out.println(h2.companyName); //always use class name
+
         System.out.println(h3);
-        System.out.println(companyName); //always use class name
-        System.out.println(h1.companyName); //discouraged, do not use
-        System.out.println(h2.companyName);
-        System.out.println(h3.companyName);
+        System.out.println(h3.companyName); //always use class name
+        System.out.println(companyName); //discouraged, do not use
+        System.out.println(companyName);
+        System.out.println(companyName);
         System.out.println(h4);
-        System.out.println(h5.companyName); //can access static members on a null instance reference
+        System.out.println(companyName); //can access static members on a null instance reference
     }
 }

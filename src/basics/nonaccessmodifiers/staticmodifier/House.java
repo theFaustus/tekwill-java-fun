@@ -9,11 +9,12 @@ public class House {
     private int height;
 
     public House(int height, int width, int length, String typeOfWindows, String typeOfMaterial) {
-        this.height = height;
+        validateAndSetHeight(height);
         this.width = width;
         this.length = length;
         this.typeOfWindows = typeOfWindows;
         this.typeOfMaterial = typeOfMaterial;
+        constructionIsDone();
     }
 
     public House(int height, int width, int length, String typeOfWindows) {
@@ -21,6 +22,7 @@ public class House {
         this.width = width;
         this.length = length;
         this.typeOfWindows = typeOfWindows;
+        constructionIsDone();
     }
 
     public static void anotherStaticMethod() {
@@ -33,6 +35,18 @@ public class House {
 
         companyName = "GConstructor-2"; // static fields can be accessed from static method
         anotherStaticMethod(); // static methods can be accessed from static method
+    }
+
+    public void constructionIsDone() {
+        System.out.println("Construction of house with type of material " + typeOfMaterial + " is done");
+    }
+
+    public void validateAndSetHeight(int height) {
+        if (height > 0) {
+            this.height = height;
+        } else {
+            this.height = 5;
+        }
     }
 
     public void instanceMethod() {

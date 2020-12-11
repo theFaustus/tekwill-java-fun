@@ -1,6 +1,7 @@
 package basics.nonaccessmodifiers.finalmodifier;
 
 public class SuperManager extends Manager {
+    @Override
     public void doWork() {
         System.out.println("do super work");
     }
