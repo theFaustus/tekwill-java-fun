@@ -31,11 +31,14 @@ public class Person {
 
     public static void main(String[] args) {
         Person person = new Person();
+
         System.out.println("2_023");
         System.out.println(2_023);
         System.out.println(person.firstLetterOfFirstName);
         System.out.println(person.firstLetterOfLastName);
         System.out.println(new DecimalFormat("###,###").format(numberOfSecondsSlept));
+
+        System.out.println(person);
     }
 
 }
