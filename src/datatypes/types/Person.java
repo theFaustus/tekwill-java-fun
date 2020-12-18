@@ -7,10 +7,10 @@ public class Person {
     public static final double NEWTONIAN_CONSTANT_OF_GRAVITATION = 6.67430e-11;
     public static final String MONDAY = "Monday";
 
-    boolean married = true;
+    public boolean married = false;
     boolean employed = false;
 
-    byte age = 20; //-128 to 127
+    public byte age = 20; //-128 to 127
     short numberOfYearsStudied = 4;//-32768 to 32767
     int numberOfDaysWorked = 2_144_654_132; //by default in java every integer literal is int
     static long numberOfSecondsSlept = 2_144_654_132_231_978_545L; //very large

@@ -1,4 +1,4 @@
-package datatypes.operators;
+package datatypes.operators.arithmetic;
 
 public class OperatorsDemo {
     public static void main(String[] args) {
@@ -90,6 +90,11 @@ public class OperatorsDemo {
         int r = 10;
         r = r++ + r + r-- - r-- + ++r; //10 + 11 + 11 - 10 + 10
         System.out.println(r);
+
+        System.out.println(Math.sqrt(49));
+        System.out.println(Math.pow(49.0, 3.0));
+        System.out.println(Math.min(9, 5));
+        System.out.println(Math.max(9, 5));
 
 
     }
