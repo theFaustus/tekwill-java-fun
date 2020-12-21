@@ -96,6 +96,10 @@ public class OperatorsDemo {
         System.out.println(Math.min(9, 5));
         System.out.println(Math.max(9, 5));
 
+        SphereVolumeCalculator.computeVolume(10);
+        SphereVolumeCalculator.computeVolume(2);
+        System.out.println(SphereVolumeCalculator.computeVolume(4));
+
 
     }
 }
