@@ -8,6 +8,14 @@ public class WhileDemo {
         int numberOfBurgers = 15;
         int currentNumberOfBurgers = 0;
 
+        int y = 1;
+        do {
+//            System.out.print(y + " ");
+//            y = y + 1;
+            System.out.println(y++ + " ");
+        } while (y <= 10);
+        System.out.println();
+
         while (needMoreBurgers) {
             System.out.println("Preparing burger #" + currentNumberOfBurgers);
             currentNumberOfBurgers++;
@@ -47,5 +55,8 @@ public class WhileDemo {
             }
 
         } while (exitCommandNotSelected);
+
     }
+
+
 }
