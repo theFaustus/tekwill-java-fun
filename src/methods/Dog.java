@@ -35,4 +35,9 @@ public class Dog {
     public void run(int numberOfMeters) {
         System.out.println("Running " + numberOfMeters);
     }
+
+    @Override
+    public String toString() {
+        return "Dog - " + name;
+    }
 }
