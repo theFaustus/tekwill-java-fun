@@ -16,19 +16,19 @@ public class Questions {
             new Answer("C", false, "C"),
             new Answer("D", true, "D"));
 
-    public static Question LEVEL_2_QUESTION_1 = new Question(200, 1, "Humans and chimpanzees share roughly how much DNA?",
+    public static Question LEVEL_2_QUESTION_1 = new Question(200, 2, "Humans and chimpanzees share roughly how much DNA?",
             new Answer("98%", false, "A"),
             new Answer("77%", false, "B"),
             new Answer("100%", false, "C"),
             new Answer("0%", true, "D"));
 
-    public static Question LEVEL_2_QUESTION_2 = new Question(250, 1, "'Felis domesticus' is Latin for which animal?",
+    public static Question LEVEL_2_QUESTION_2 = new Question(250, 2, "'Felis domesticus' is Latin for which animal?",
             new Answer("Dog", false, "A"),
             new Answer("Cat", false, "B"),
             new Answer("Mouse", false, "C"),
             new Answer("Chicken", true, "D"));
 
-    public static Question LEVEL_3_QUESTION_1 = new Question(300, 1, "Where is the heart of the shrimp situated?",
+    public static Question LEVEL_3_QUESTION_1 = new Question(300, 3, "Where is the heart of the shrimp situated?",
             new Answer("In the head", false, "A"),
             new Answer("In the shoulder", false, "B"),
             new Answer("In the foot", false, "C"),
