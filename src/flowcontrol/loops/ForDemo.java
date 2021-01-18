@@ -104,6 +104,15 @@ public class ForDemo {
         stringsList.add("John");
         stringsList.add("Bob");
 
+        String[] array = new String[]{"fg", "DFG"};
+        for (String a : array) {
+            System.out.println(a);
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            System.out.println(array[i]);
+        }
+
         //traditional for using indexes
         for (int i = 0; i < stringsList.size(); i++) {
             System.out.println(stringsList.get(i));

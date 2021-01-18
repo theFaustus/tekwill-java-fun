@@ -11,10 +11,10 @@ public class AskAudienceHelpOption {
         int firstProbability = new Random().nextInt(24);
         int secondProbability = new Random().nextInt(24);
         int thirdProbability = new Random().nextInt(24);
-        System.out.println("          \u2B55 " + question.getWrongAnswerOne() + " - " + firstProbability + "%");
-        System.out.println("          \u2B55 " + question.getWrongAnswerTwo() + " - " + secondProbability + "%");
-        System.out.println("          \u2B55 " + question.getWrongAnswerThree() + " - " + thirdProbability + "%");
-        System.out.println("          \u2B55 " + question.getCorrectAnswer() + " - " + (100 - firstProbability - secondProbability - thirdProbability) + "%");
+        System.out.println("          \u2B55 " + question.getAnswerOne() + " - " + firstProbability + "%");
+        System.out.println("          \u2B55 " + question.getAnswerTwo() + " - " + secondProbability + "%");
+        System.out.println("          \u2B55 " + question.getAnswerThree() + " - " + thirdProbability + "%");
+        System.out.println("          \u2B55 " + question.getAnswerFour() + " - " + (100 - firstProbability - secondProbability - thirdProbability) + "%");
         setUsed(true);
         setInvoked(false);
     }

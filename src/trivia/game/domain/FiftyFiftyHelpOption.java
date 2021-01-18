@@ -6,8 +6,8 @@ public class FiftyFiftyHelpOption {
 
     public void invoke(Question question) {
         System.out.println("    (\uD83E\uDD16) -> Computer says: ");
-        System.out.println("          \u2B55 " + question.getWrongAnswerOne() + " - 50%");
-        System.out.println("          \u2B55 " + question.getCorrectAnswer() + " - 50%");
+        System.out.println("          \u2B55 " + question.getAnswerOne() + " - 50%");
+        System.out.println("          \u2B55 " + question.getAnswerFour() + " - 50%");
         setUsed(true);
         setInvoked(false);
     }

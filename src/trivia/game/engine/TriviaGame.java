@@ -91,17 +91,20 @@ public class TriviaGame {
             numberOfHelpOptionsAvailable--;
         } else {
             System.out.println("    [\uD83D\uDCCC] " + questionNumber + ". " + question.getText());
-            System.out.println("          \u2B55 " + question.getWrongAnswerOne());
-            System.out.println("          \u2B55 " + question.getWrongAnswerTwo());
-            System.out.println("          \u2B55 " + question.getWrongAnswerThree());
-            System.out.println("          \u2B55 " + question.getCorrectAnswer());
+            System.out.println("          \u2B55 " + question.getAnswerOne());
+            System.out.println("          \u2B55 " + question.getAnswerTwo());
+            System.out.println("          \u2B55 " + question.getAnswerThree());
+            System.out.println("          \u2B55 " + question.getAnswerFour());
         }
 
         currentQuestion = question;
     }
 
     private void validateResponse(String questionResponse) {
-        if (questionResponse.equalsIgnoreCase(currentQuestion.getCorrectAnswer().getLetter())) {
+        if ((currentQuestion.getAnswerOne().isCorrect() && questionResponse.equalsIgnoreCase(currentQuestion.getAnswerOne().getLetter()))
+                || (currentQuestion.getAnswerTwo().isCorrect() && questionResponse.equalsIgnoreCase(currentQuestion.getAnswerTwo().getLetter()))
+                || (currentQuestion.getAnswerThree().isCorrect() && questionResponse.equalsIgnoreCase(currentQuestion.getAnswerThree().getLetter()))
+                || (currentQuestion.getAnswerFour().isCorrect() && questionResponse.equalsIgnoreCase(currentQuestion.getAnswerFour().getLetter()))) {
             questionNumber++;
             currentScore += currentQuestion.getScore();
             System.out.println("    [\uD83E\uDD29] Yaaay! Current score : " + currentScore);

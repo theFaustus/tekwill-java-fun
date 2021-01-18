@@ -1,5 +1,7 @@
 package methods.building;
 
+import methods.Puppy;
+
 public class Employee {
     private static String office;
 
@@ -36,6 +38,7 @@ public class Employee {
     private String name = "n/a";
     private int age;
     private Department department;
+    private Puppy puppy;
 
     { //executes per object
         System.out.println("Employee is being born... 0");
@@ -132,6 +135,7 @@ public class Employee {
                 "name='" + name + '\'' +
                 ", age=" + age +
                 ", department=" + department +
+                ", puppy=" + puppy +
                 '}';
     }
 }

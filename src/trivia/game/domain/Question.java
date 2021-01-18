@@ -5,51 +5,51 @@ public class Question {
     private int score;
     private int level;
     private String text;
-    private Answer wrongAnswerOne;
-    private Answer wrongAnswerTwo;
-    private Answer wrongAnswerThree;
-    private Answer correctAnswer;
+    private Answer answerOne;
+    private Answer answerTwo;
+    private Answer answerThree;
+    private Answer answerFour;
 
-    public Question(int score, int level, String text, Answer wrongAnswerOne, Answer wrongAnswerTwo, Answer wrongAnswerThree, Answer correctAnswer) {
+    public Question(int score, int level, String text, Answer answerOne, Answer answerTwo, Answer answerThree, Answer answerFour) {
         this.score = score;
         this.level = level;
         this.text = text;
-        this.wrongAnswerOne = wrongAnswerOne;
-        this.wrongAnswerTwo = wrongAnswerTwo;
-        this.wrongAnswerThree = wrongAnswerThree;
-        this.correctAnswer = correctAnswer;
+        this.answerOne = answerOne;
+        this.answerTwo = answerTwo;
+        this.answerThree = answerThree;
+        this.answerFour = answerFour;
     }
 
-    public Answer getWrongAnswerOne() {
-        return wrongAnswerOne;
+    public Answer getAnswerOne() {
+        return answerOne;
     }
 
-    public void setWrongAnswerOne(Answer wrongAnswerOne) {
-        this.wrongAnswerOne = wrongAnswerOne;
+    public void setAnswerOne(Answer answerOne) {
+        this.answerOne = answerOne;
     }
 
-    public Answer getWrongAnswerTwo() {
-        return wrongAnswerTwo;
+    public Answer getAnswerTwo() {
+        return answerTwo;
     }
 
-    public void setWrongAnswerTwo(Answer wrongAnswerTwo) {
-        this.wrongAnswerTwo = wrongAnswerTwo;
+    public void setAnswerTwo(Answer answerTwo) {
+        this.answerTwo = answerTwo;
     }
 
-    public Answer getWrongAnswerThree() {
-        return wrongAnswerThree;
+    public Answer getAnswerThree() {
+        return answerThree;
     }
 
-    public void setWrongAnswerThree(Answer wrongAnswerThree) {
-        this.wrongAnswerThree = wrongAnswerThree;
+    public void setAnswerThree(Answer answerThree) {
+        this.answerThree = answerThree;
     }
 
-    public Answer getCorrectAnswer() {
-        return correctAnswer;
+    public Answer getAnswerFour() {
+        return answerFour;
     }
 
-    public void setCorrectAnswer(Answer correctAnswer) {
-        this.correctAnswer = correctAnswer;
+    public void setAnswerFour(Answer answerFour) {
+        this.answerFour = answerFour;
     }
 
     public int getScore() {
@@ -82,10 +82,10 @@ public class Question {
                 "score=" + score +
                 ", level=" + level +
                 ", text='" + text + '\'' +
-                ", wrongAnswerOne=" + wrongAnswerOne +
-                ", wrongAnswerTwo=" + wrongAnswerTwo +
-                ", wrongAnswerThree=" + wrongAnswerThree +
-                ", correctAnswer=" + correctAnswer +
+                ", wrongAnswerOne=" + answerOne +
+                ", wrongAnswerTwo=" + answerTwo +
+                ", wrongAnswerThree=" + answerThree +
+                ", correctAnswer=" + answerFour +
                 '}';
     }
 }
