@@ -12,7 +12,8 @@ public class RandomDemo {
             System.out.println(random.nextInt(10) + 5);
             System.out.println();
             System.out.println(random.nextBoolean());
-            System.out.println(random.nextDouble() + random.nextInt(10));
+            System.out.println(random.nextDouble());
+            System.out.println(random.nextDouble() + 1);
             System.out.println();
         }
     }

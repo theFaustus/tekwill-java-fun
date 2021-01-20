@@ -1,6 +1,11 @@
 package javaapi.arrays;
 
+import basics.interfaces.example.Developer;
+import basics.interfaces.example.Policeman;
+import basics.interfaces.example.Runner;
 import methods.building.Employee;
+
+import java.util.Arrays;
 
 public class ArraysDemo {
     public static void main(String[] args) {
@@ -43,11 +48,11 @@ public class ArraysDemo {
         doubleArray = new double[10];
 
         wordsToSplittedArray = new String[stringArray.length][];
-        wordsToSplittedArray[0] = new String[4];
-        wordsToSplittedArray[1] = new String[6];
-        wordsToSplittedArray[2] = new String[3];
-        //...
-        wordsToSplittedArray[4] = new String[2];
+//        wordsToSplittedArray[0] = new String[4];
+//        wordsToSplittedArray[1] = new String[6];
+//        wordsToSplittedArray[2] = new String[3];
+//        //...
+//        wordsToSplittedArray[4] = new String[2];
 
         //2. initialization
         intArray[0] = 4;
@@ -58,18 +63,19 @@ public class ArraysDemo {
 //        intArray[9]= 8; will throw exception
 //        intArray[-5] = 5;  will throw exception
 
-//        stringArray[0] = "dog";
-//        stringArray[1] = "dog";
-//        stringArray[2] = "dog";
-//        stringArray[3] = "dog";
-//        stringArray[4] = "dog";
-//        better use for
+        stringArray[0] = "dog";
+        stringArray[1] = "kitty";
+        stringArray[2] = "bird";
+        stringArray[3] = "penguin";
+        stringArray[4] = "mouse";
+
+//better use for when same value
 
 
-        for (int i = 0; i < stringArray.length; i++) {
-            System.out.println(stringArray[i]);
-            stringArray[i] = "dog - " + i;
-        }
+//        for (int i = 0; i < stringArray.length; i++) {
+//            System.out.println(stringArray[i]);
+//            stringArray[i] = "dog - " + i;
+//        }
 
         for (int i = 0; i < stringArray.length; i++) {
             System.out.println(stringArray[i]);
@@ -137,6 +143,111 @@ public class ArraysDemo {
         System.out.println(stringArray.length);
         for (String s : stringArray) {
             System.out.println(s);
+        }
+
+//        wordsToSplittedArray
+//        String[] split = "".split("");
+
+        for (int i = 0; i < stringArray.length; i++) {
+            //i = 0 , dog
+            String[] splitCharacters = stringArray[i].split("");
+            wordsToSplittedArray[i] = splitCharacters;
+        }
+
+        for (int i = 0; i < stringArray.length; i++) {
+            //i = 0 , dog
+            for (int j = 0; j < stringArray[i].length(); j++) {
+                System.out.println(stringArray[i].charAt(j));
+            }
+        }
+
+        for (int i = 0; i < wordsToSplittedArray.length; i++) {
+//            Arrays.sort(wordsToSplittedArray[i]); if you want them sorted
+            System.out.println(Arrays.toString(wordsToSplittedArray[i]));
+        }
+
+
+        //***. combining all of them
+
+        //1, 2, 3, 4, 5
+        int[] intArr = new int[]{1, 2, 3, 4, 5};
+        //2.2, 3, 4.0
+        double[] doubleArr = new double[]{2.2, 3, 4.0};
+        //"word", "animal", "dog"
+        String[] stringArr = new String[]{"dog", "kitty", "penguin"};
+        //"Employee(...)", "Employee(...)", "Employee(...)"
+        Employee[] employeeArr = new Employee[]{new Employee("Mike"), new Employee("Bob"), new Employee("Peter", 34)};
+
+        //"word", "animal", "dog", "bob"
+        // "word" -> "w", "o", "r", "d"
+        // "animal" -> "a", "n", "i", "m" ...
+        // ...
+        String[][] wordsToSplittedArr = new String[][]{
+                {"a", "b", "c"},
+                {"x", "y", "z"}
+        };
+
+        //1 0 2
+        //0 1 0
+        //1 1 1
+        int[][] matrixArr = new int[][]{
+                {1, 0, 2},
+                {0, 1, 0},
+                {1, 1, 1}
+        };
+
+        int[][] matrixArr2 = new int[][]{
+                {1, 0, 2, 4},
+                {0, 1, 0, 7, 9, 15},
+                {1, 1,},
+                {1, 1, 5, -1}
+        };
+
+
+        System.out.println(Arrays.toString(intArr));
+        System.out.println(Arrays.toString(doubleArr));
+        System.out.println(Arrays.toString(stringArr));
+        System.out.println(Arrays.toString(employeeArr));
+
+        System.out.println();
+
+        for (String[] s : wordsToSplittedArr)
+            System.out.println(Arrays.toString(s));
+
+        System.out.println();
+
+        for (int[] ia : matrixArr)
+            System.out.println(Arrays.toString(ia));
+
+        System.out.println();
+
+        for (int[] ia : matrixArr2)
+            System.out.println(Arrays.toString(ia));
+
+
+        //array from inheritance/interfaces
+
+        Policeman[] policemen = new Policeman[]{};
+        for (Policeman policeman : policemen) {
+            policeman.run();
+        }
+
+        Developer[] developers = new Developer[]{};
+        for (Developer developer : developers) {
+            developer.run();
+        }
+
+        Runner[] runners = new Runner[]{new Policeman(), new Developer()};
+        for (Runner runner : runners) {
+            runner.run();
+        }
+
+        Object[] objectRunners = new Object[]{new Policeman(), new Developer()};
+        for (Object objectRunner : objectRunners) {
+            if (objectRunner instanceof Policeman)
+                ((Policeman) objectRunner).doPoliceWork();
+            else if (objectRunner instanceof Developer)
+                ((Developer) objectRunner).run();
         }
 
 
