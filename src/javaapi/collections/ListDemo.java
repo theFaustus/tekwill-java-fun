@@ -1,6 +1,5 @@
 package javaapi.collections;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
@@ -9,7 +8,7 @@ public class ListDemo {
 
     public static void main(String[] args) {
         int[] arr = {1};
-        ArrayList<String> shoppingList = new ArrayList<>();
+        List<String> shoppingList = new MyAwesomeList();
         shoppingList.add("Potatos");
         shoppingList.add("Tomatos");
         shoppingList.add("Toothpaste");
@@ -83,6 +82,14 @@ public class ListDemo {
         shoppingList.add("Tomatos");
         System.out.println(shoppingList.indexOf("Tomatos"));
         System.out.println(shoppingList.lastIndexOf("Tomatos"));
+
+        foo(shoppingList);
+    }
+
+    public static void foo(List<String> arrayList) {
+        for (String s : arrayList) {
+            System.out.println(s);
+        }
     }
 
 }

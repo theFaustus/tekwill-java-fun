@@ -1,26 +1,29 @@
-package methods.building;
+package javaapi.collections;
 
 import methods.Puppy;
+import methods.building.Computer;
+import methods.building.Department;
+import methods.building.Phone;
 
 import java.util.Objects;
 
-public class Employee {
+public class Employee implements Comparable<Employee> {
     private static String office;
 
-    static { //executes once per entire class
-        System.out.println("Static life of employee is being created... 0");
-        office = "Main-Office";
-    }
-
-    static { //executes once per entire class
-        System.out.println("Static life of employee is being created... 1");
-        office = "Main-Office";
-    }
-
-    static { //executes once per entire class
-        System.out.println("Static life of employee is being created... 2");
-        office = "Main-Office";
-    }
+//    static { //executes once per entire class
+//        System.out.println("Static life of employee is being created... 0");
+//        office = "Main-Office";
+//    }
+//
+//    static { //executes once per entire class
+//        System.out.println("Static life of employee is being created... 1");
+//        office = "Main-Office";
+//    }
+//
+//    static { //executes once per entire class
+//        System.out.println("Static life of employee is being created... 2");
+//        office = "Main-Office";
+//    }
 
 // Carefully not a constructor - simply a method with the same name as the class
 //
@@ -42,17 +45,17 @@ public class Employee {
     private Department department;
     private Puppy puppy;
 
-    { //executes per object
-        System.out.println("Employee is being born... 0");
-    }
-
-    { //executes per object
-        System.out.println("Employee is being born... 1");
-    }
-
-    { //executes per object
-        System.out.println("Employee is being born... 2");
-    }
+//    { //executes per object
+//        System.out.println("Employee is being born... 0");
+//    }
+//
+//    { //executes per object
+//        System.out.println("Employee is being born... 1");
+//    }
+//
+//    { //executes per object
+//        System.out.println("Employee is being born... 2");
+//    }
 
     //Constructor overloading in action
     public Employee(String name, int age, Department department) {
@@ -152,5 +155,16 @@ public class Employee {
                 ", department=" + department +
                 ", puppy=" + puppy +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Employee o) {
+        return this.name.compareTo(o.getName());
+//        if(this.name.length() > o.getName().length())
+//            return 1;
+//        else if(this.name.length() < o.getName().length())
+//            return -1;
+//        else
+//            return 0;
     }
 }
