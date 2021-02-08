@@ -1,22 +1,21 @@
 package javaapi.datetime;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 
-public class LocalDateDemo {
+public class LocalDateTimeDemo {
     public static void main(String[] args) {
-        LocalDate l1 = LocalDate.of(2021, 1, 29);
-        LocalDate l2 = LocalDate.of(2021, Month.JANUARY, 29);
-        LocalDate l3 = LocalDate.now();
-        LocalDate l4 = LocalDate.parse("2021-01-29");
+        LocalDateTime l1 = LocalDateTime.of(2021, 1, 29, 1, 30);
+        LocalDateTime l2 = LocalDateTime.of(2021, Month.JANUARY, 29, 2, 45);
+        LocalDateTime l3 = LocalDateTime.now();
+        LocalDateTime l4 = LocalDateTime.parse("2021-01-29T01:30");
 
         System.out.println(l1);
         System.out.println(l2);
         System.out.println(l3);
         System.out.println(l4);
 
-//        l3 = LocalDate.of(2021, 4, 29);
+//        l3 = LocalDateTime.of(2021, 4, 29);
 
         System.out.println(l3.getDayOfMonth());
         System.out.println(l3.getDayOfWeek());
@@ -25,7 +24,11 @@ public class LocalDateDemo {
         System.out.println(l3.getMonthValue());
         System.out.println(l3.getYear());
 
-        LocalDate other = l2.plusYears(2).plusDays(4);
+        System.out.println(l3.getHour());
+        System.out.println(l3.getMinute());
+        System.out.println(l3.getSecond());
+
+        LocalDateTime other = l2.plusYears(2).plusDays(4);
         System.out.println(other);
         System.out.println(l3.isBefore(other));
         System.out.println(l3.isAfter(other));
@@ -34,8 +37,9 @@ public class LocalDateDemo {
         System.out.println(l4.minusYears(2).minusDays(3).minusMonths(4));
 
 
-        LocalDate start = LocalDate.of(2020, 1, 1);
-        LocalDate end = LocalDate.parse("2020-02-01");
+        LocalDateTime start = LocalDateTime.of(2020, 1, 1, 16, 30);
+        LocalDateTime end = LocalDateTime.parse("2020-02-01T16:30");
+
 
         while (!start.isEqual(end)) {
             System.out.println(start);
@@ -48,11 +52,8 @@ public class LocalDateDemo {
         System.out.println(l1.withYear(5));
         System.out.println(l1.withDayOfYear(5));
 
-        LocalDateTime localDateTime = l1.atTime(4, 30);
-        System.out.println(localDateTime);
 
-        System.out.println(l1.toEpochDay());
-        System.out.println(LocalDate.of(1970, 2, 2).toEpochDay());
-
+        System.out.println(start.toLocalDate());
+        System.out.println(start.toLocalTime());
     }
 }
