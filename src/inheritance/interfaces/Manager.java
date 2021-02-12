@@ -28,4 +28,9 @@ public class Manager extends Employee implements Trainable, Interviewer {
     public void attendTraining() {
         System.out.println("Manager attends a training");
     }
+
+    @Override
+    public void signContract(String contract) {
+        System.out.println("Manager signed contract " + contract);
+    }
 }

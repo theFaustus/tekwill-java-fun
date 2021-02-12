@@ -1,22 +1,28 @@
 package inheritance.interfaces.devicezx;
 
-public class SmartHomeController {
-    HallRoomLight hallRoomLight;
-    MusicSpeaker musicSpeaker;
-    TV tv;
+import java.util.ArrayList;
+import java.util.List;
 
-    public SmartHomeController(HallRoomLight hallRoomLight, MusicSpeaker musicSpeaker, TV tv) {
-        this.hallRoomLight = hallRoomLight;
-        this.musicSpeaker = musicSpeaker;
-        this.tv = tv;
+public class SmartHomeController {
+    //    HallRoomLight hallRoomLight;
+//    MusicSpeaker musicSpeaker;
+//    TV tv;
+// won`t talk to them in particular, but rather as smart devices instead
+    List<SmartDevice> smartDeviceList = new ArrayList<>();
+
+
+    public SmartHomeController(List<SmartDevice> smartDevices) {
+        this.smartDeviceList = smartDevices;
+    }
+
+    public void addSmartDevice(SmartDevice smartDevice) {
+        smartDeviceList.add(smartDevice);
     }
 
     public void emergencyPowerOff() {
-        //TODO: Talk about something
-
-        hallRoomLight.emergencyShutdown();
-        musicSpeaker.emergencyShutdown();
-        tv.emergencyShutdown();
+        for (SmartDevice smartDevice : smartDeviceList) {
+            smartDevice.emergencyShutdown();
+        }
     }
 
     public void updateDevices() {
@@ -25,16 +31,31 @@ public class SmartHomeController {
     }
 
     public void turnOnAllDevices() {
-        hallRoomLight.turnOn();
-        musicSpeaker.turnOn();
-        tv.turnOn();
+        for (SmartDevice smartDevice : smartDeviceList) {
+            smartDevice.turnOn();
+        }
     }
 
     public void turnOffAllDevices() {
-        hallRoomLight.turnOff();
-        musicSpeaker.turnOff();
-        tv.turnOff();
+        for (SmartDevice smartDevice : smartDeviceList) {
+            smartDevice.turnOff();
+        }
     }
 
-    //TODO: Talk about changing access of the implemented method
+    public void changeTvVolume(int volume) {
+        for (SmartDevice smartDevice : smartDeviceList) {
+//            ((TV) smartDevice).changeVolume(volume);
+//            dangerous to assume that all implementations/childs are of the same type,
+//            better check with instanceof otherwise be ready for ClassCastException
+            if (smartDevice instanceof TV) { //SmartDevice sm = new TV();
+                ((TV) smartDevice).changeVolume(volume);
+            } else if (smartDevice instanceof Radio) {
+                ((Radio) smartDevice).changeVolume(volume);
+            }
+        }
+    }
+
+    public List<SmartDevice> getSmartDeviceList() {
+        return smartDeviceList;
+    }
 }

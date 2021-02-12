@@ -1,6 +1,6 @@
 package inheritance.interfaces.devicezx;
 
-public class MusicSpeaker implements SmartDevice {
+public class MusicSpeaker extends Device implements SmartDevice {
     @Override
     public void turnOn() {
         System.out.println("Speaker is ON");
@@ -9,5 +9,13 @@ public class MusicSpeaker implements SmartDevice {
     @Override
     public void turnOff() {
         System.out.println("Speaker is OFF");
+    }
+
+    @Override
+    public String toString() {
+        return "MusicSpeaker{" +
+                "serialNumber='" + serialNumber + '\'' +
+                ", brand='" + brand + '\'' +
+                '}';
     }
 }
