@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class BookRepositoryImpl implements BookRepository {
     Set<Book> books = new HashSet<>(
-            Arrays.asList(new Book("123456789", "nananana"), new Book("789456123", "lalalala")));
+            Arrays.asList(new Book("123456789", "nananana", false, 354), new Book("789456123", "lalalala", true, 249)));
 
     @Override
     public Book findBook(String isbn) throws BookNotFoundRuntimeException, BookNotFoundCheckedException {

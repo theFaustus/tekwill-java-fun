@@ -1,18 +1,28 @@
 package inheritance.exceptions.book.domain;
 
+
 import java.util.Objects;
 
 public class Book {
+    private Long id;
     private String isbn;
-    private String content;
+    private String name;
+    private boolean isRare;
+    private int numberOfPages;
 
-    public Book(String isbn, String content) {
+    public Book(String isbn, String name, boolean isRare, int numberOfPages) {
         this.isbn = isbn;
-        this.content = content;
+        this.name = name;
+        this.isRare = isRare;
+        this.numberOfPages = numberOfPages;
     }
 
-    public Book(String isbn) {
-        this.isbn = isbn;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getIsbn() {
@@ -23,12 +33,28 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public String getContent() {
-        return content;
+    public String getName() {
+        return name;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isRare() {
+        return isRare;
+    }
+
+    public void setRare(boolean rare) {
+        isRare = rare;
+    }
+
+    public int getNumberOfPages() {
+        return numberOfPages;
+    }
+
+    public void setNumberOfPages(int numberOfPages) {
+        this.numberOfPages = numberOfPages;
     }
 
     @Override
@@ -36,19 +62,24 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(isbn, book.isbn) && Objects.equals(content, book.content);
+        return isRare == book.isRare && numberOfPages == book.numberOfPages && Objects.equals(id,
+                                                                                              book.id) && Objects.equals(
+                isbn, book.isbn) && Objects.equals(name, book.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(isbn, content);
+        return Objects.hash(id, isbn, name, isRare, numberOfPages);
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "isbn='" + isbn + '\'' +
-                ", content='" + content + '\'' +
+                "id=" + id +
+                ", isbn='" + isbn + '\'' +
+                ", name='" + name + '\'' +
+                ", isRare=" + isRare +
+                ", numberOfPages=" + numberOfPages +
                 '}';
     }
 }
