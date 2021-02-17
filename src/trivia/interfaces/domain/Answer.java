@@ -1,6 +1,8 @@
 package trivia.interfaces.domain;
 
 
+import trivia.interfaces.domain.exceptions.EmptyAnswerTextException;
+
 import java.util.Objects;
 
 public class Answer {
@@ -10,8 +12,9 @@ public class Answer {
 
     private Question question;
 
-
     public Answer(String text, boolean isCorrect, String letter) {
+        if (text.isEmpty())
+            throw new EmptyAnswerTextException("Answer text should not be empty");
         this.text = text;
         this.isCorrect = isCorrect;
         this.letter = letter;
