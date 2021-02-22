@@ -1,4 +1,4 @@
-package inheritance.exceptions.book.domain;
+package book.domain;
 
 
 import java.util.ArrayList;

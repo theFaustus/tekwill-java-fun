@@ -21,7 +21,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     public List<Question> findQuestionsByLevel(int level) {
         List<Question> questions = new ArrayList<>();
         try (Connection c = DriverManager.getConnection(url + database, userName, password)) {
-            //retrive question
+            //retrieve question
             PreparedStatement ps = c.prepareStatement("SELECT * FROM QUESTION Q  WHERE Q.LEVEL = ?");
             ps.setInt(1, level);
             ResultSet r = ps.executeQuery();
