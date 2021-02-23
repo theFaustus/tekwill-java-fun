@@ -8,7 +8,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class QuestionRepositoryImpl implements QuestionRepository {
@@ -16,6 +18,14 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     private final String database = "trivia";
     private final String userName = "postgres";
     private final String password = "123456";
+
+    public static void main(String[] args) {
+        new QuestionRepositoryImpl().save(new Question(100, 1, "How many wings does a tresquito have?",
+                                                       Arrays.asList(new Answer("Two", true, "A"),
+                                                                     new Answer("Three", false, "B"),
+                                                                     new Answer("Four", false, "C"),
+                                                                     new Answer("Ten", false, "D"))));
+    }
 
     @Override
     public List<Question> findQuestionsByLevel(int level) {
@@ -52,14 +62,17 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     public boolean save(Question question) {
         try (Connection c = DriverManager.getConnection(url + database, userName, password)) {
             //insert question
-            PreparedStatement ps = c.prepareStatement("INSERT INTO QUESTION VALUES (?, ?, ?, ?)");
-            Long questionId = nextVal();
-            ps.setLong(1, questionId);
-            ps.setInt(2, question.getLevel());
-            ps.setInt(3, question.getScore());
-            ps.setString(4, question.getText());
+            PreparedStatement ps = c.prepareStatement("INSERT INTO QUESTION(level, score, text) VALUES (?, ?, ?)",
+                                                      Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, question.getLevel());
+            ps.setInt(2, question.getScore());
+            ps.setString(3, question.getText());
             ps.executeUpdate();
 
+            ResultSet generatedKeys = ps.getGeneratedKeys();
+            Long questionId = 0L;
+            if (generatedKeys.next())
+                questionId = generatedKeys.getLong(1);
             //insert answers
             for (Answer a : question.getAnswers()) {
                 ps = c.prepareStatement("INSERT INTO ANSWER VALUES (?, ?, ?, ?, ?)");
