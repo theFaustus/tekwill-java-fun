@@ -313,9 +313,30 @@ select *
 from book b
 where b.name like '%3';
 
+select *
+from book b;
 
+select *
+from page p;
 
+select *
+from page
+where book_id = 4;
 
+--about auto increment id
+select nextval('book_sequence');
+insert into book(isbn, "name", is_rare, number_of_pages)
+values ('456432132133', 'The Book', true, 375),
+       ('456432132133', 'The Book 2', false, 189),
+       ('456432132133', 'The Book 3', true, 400);
+
+insert into page("content", page_number, book_id)
+values ('1 bla bla bla', 1, 18),
+       ('1 bla bla bla', 2, 18),
+       ('1 bla bla bla', 3, 18),
+       ('2 bla bla bla', 1, 18),
+       ('3 bla bla bla', 1, 18),
+       ('3 bla bla bla', 2, 18);
 
 
 

@@ -1,23 +1,22 @@
 package book.repo;
 
 import book.domain.Book;
-import book.domain.exceptions.BookNotFoundCheckedException;
-import book.domain.exceptions.BookNotFoundRuntimeException;
+import book.domain.Page;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BookRepositoryImpl implements BookRepository {
-    Set<Book> books = new HashSet<>(
-            Arrays.asList(new Book("123456789", "nananana", false, 354),
-                          new Book("789456123", "lalalala", true, 249)));
+    public static final String DB_URL = "jdbc:postgresql://localhost:5432/book-db?user=postgres&password=123456";
 
     @Override
-    public Book findBook(String isbn) throws BookNotFoundRuntimeException, BookNotFoundCheckedException {
+    public Book findBook(String isbn) {
 //        Book foundBook = null;
 //        for (Book b : books) {
 //            if (b.getIsbn().equals(isbn))
@@ -29,14 +28,37 @@ public class BookRepositoryImpl implements BookRepository {
 //        }
 //        return foundBook;
 
+        Book book = null;
+        try (Connection connection = DriverManager.getConnection(DB_URL);
+             PreparedStatement st1 = connection.prepareStatement("SELECT * FROM book WHERE isbn = ?")) {
+            st1.setString(1, isbn);
+            ResultSet r = st1.executeQuery();
+            while (r.next()) {
+//                System.out.println(r.getLong(1));
+                book = new Book(r.getLong("id"),
+                                r.getString("isbn"),
+                                r.getString("name"),
+                                r.getBoolean("is_rare"),
+                                r.getInt("number_of_pages"));
+            }
 
-        try (Connection connection = DriverManager.getConnection(
-                "jdbc:postgresql://localhost:5432/book-db?user=postgres&password=123456")) {
-            System.out.println("Using long url obtained " + connection.getClientInfo());
+            PreparedStatement st2 = connection.prepareStatement("select * from page where book_id = ?");
+            st2.setLong(1, book.getId());
+            ResultSet r2 = st2.executeQuery();
+
+            while (r2.next()) {
+                Page page = new Page(r2.getLong("id"),
+                                     r2.getString("content"),
+                                     r2.getInt("page_number"));
+                book.addPage(page);
+            }
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        return book;
 //        try(Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/book-db", "postgres", "123456")){
 //            System.out.println("Using user/password obtained " + connection.getClientInfo());
 //        } catch (SQLException e){
@@ -53,6 +75,121 @@ public class BookRepositoryImpl implements BookRepository {
 //            e.printStackTrace();
 //        }
 
-        return null;
     }
+
+    @Override
+    public List<Book> findAll() {
+        List<Book> books = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(DB_URL);
+             PreparedStatement st1 = connection.prepareStatement("SELECT * FROM book")) {
+            ResultSet r = st1.executeQuery();
+            while (r.next()) {
+//                System.out.println(r.getLong(1));
+                Book book = new Book(r.getLong("id"),
+                                     r.getString("isbn"),
+                                     r.getString("name"),
+                                     r.getBoolean("is_rare"),
+                                     r.getInt("number_of_pages"));
+                books.add(book);
+            }
+
+            for (Book book : books) {
+                PreparedStatement st2 = connection.prepareStatement("select * from page where book_id = ?");
+                st2.setLong(1, book.getId());
+                ResultSet r2 = st2.executeQuery();
+
+                while (r2.next()) {
+                    Page page = new Page(r2.getLong("id"),
+                                         r2.getString("content"),
+                                         r2.getInt("page_number"));
+                    book.addPage(page);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return books;
+    }
+
+    @Override
+    public int updateBookNameByBookId(String newBookName, Long bookId) {
+        int result = 0;
+        try (Connection connection = DriverManager.getConnection(DB_URL);
+             PreparedStatement statement = connection.prepareStatement("UPDATE book b SET name = ? WHERE b.id = ?")) {
+            statement.setString(1, newBookName);
+            statement.setLong(2, bookId);
+
+            result = statement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @Override
+    public int deleteBook(Long bookId) {
+        int result = 0;
+        try (Connection connection = DriverManager.getConnection(DB_URL)) {
+            //delete the orphans first
+            PreparedStatement st1 = connection.prepareStatement("DELETE FROM page p WHERE p.book_id = ?");
+            st1.setLong(1, bookId);
+            st1.executeUpdate();
+
+            PreparedStatement st2 = connection.prepareStatement("DELETE FROM book b WHERE b.id = ?");
+            st2.setLong(1, bookId);
+            result = st2.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    @Override
+    public int saveBook(Book book) {
+        int result = 0;
+        try (Connection connection = DriverManager.getConnection(DB_URL)) {
+
+//            final PreparedStatement st1 = connection.prepareStatement(
+//                    "insert into book(id, isbn, name, is_rare, number_of_pages) values (?, ?, ?, ?, ?)");
+//            st1.setLong(1, book.getId());
+//            st1.setString(2, book.getIsbn());
+//            st1.setString(3, book.getName());
+//            st1.setBoolean(4, book.isRare());
+//            st1.setInt(5, book.getNumberOfPages());
+//            result = st1.executeUpdate();
+
+            //auto id
+            final PreparedStatement st1 = connection.prepareStatement(
+                    "insert into book(isbn, name, is_rare, number_of_pages) values (?, ?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS);
+            st1.setString(1, book.getIsbn());
+            st1.setString(2, book.getName());
+            st1.setBoolean(3, book.isRare());
+            st1.setInt(4, book.getNumberOfPages());
+            result = st1.executeUpdate();
+            //retrieve auto generated id and set it on book
+            final ResultSet generatedKeys = st1.getGeneratedKeys();
+            if (generatedKeys.next())
+                book.setId(generatedKeys.getLong(1));
+
+            for (Page page : book.getPages()) {
+                final PreparedStatement st2 = connection.prepareStatement(
+                        "insert into page(content, page_number, book_id) VALUES (?, ?, ?)");
+                st2.setString(1, page.getContent());
+                st2.setInt(2, page.getPageNumber());
+                st2.setLong(3, book.getId());
+                st2.executeUpdate();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
 }

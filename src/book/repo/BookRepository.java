@@ -1,9 +1,17 @@
 package book.repo;
 
 import book.domain.Book;
-import book.domain.exceptions.BookNotFoundCheckedException;
-import book.domain.exceptions.BookNotFoundRuntimeException;
+
+import java.util.List;
 
 public interface BookRepository {
-    Book findBook(String isbn) throws BookNotFoundRuntimeException, BookNotFoundCheckedException;
+    Book findBook(String isbn);
+
+    List<Book> findAll();
+
+    int updateBookNameByBookId(String newBookName, Long bookId);
+
+    int deleteBook(Long bookId);
+
+    int saveBook(Book book);
 }

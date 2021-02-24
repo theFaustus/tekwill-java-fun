@@ -9,11 +9,22 @@ public class Page {
 
     private Book book;
 
+    public Page(Long id, String content, int pageNumber) {
+        this.id = id;
+        this.content = content;
+        this.pageNumber = pageNumber;
+    }
+
     public Page(Long id, String content, int pageNumber, Book book) {
         this.id = id;
         this.content = content;
         this.pageNumber = pageNumber;
         this.book = book;
+    }
+
+    public Page(String content, int pageNumber) {
+        this.content = content;
+        this.pageNumber = pageNumber;
     }
 
     public Long getId() {
@@ -69,7 +80,6 @@ public class Page {
                 "id=" + id +
                 ", content='" + content + '\'' +
                 ", pageNumber=" + pageNumber +
-                ", book=" + book +
                 '}';
     }
 }

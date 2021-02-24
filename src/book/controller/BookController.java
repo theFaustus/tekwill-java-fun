@@ -1,8 +1,6 @@
 package book.controller;
 
 import book.domain.Book;
-import book.domain.exceptions.BookNotFoundCheckedException;
-import book.domain.exceptions.ISBNNotSupportedRuntimeException;
 import book.service.BookService;
 
 public class BookController {
@@ -13,18 +11,38 @@ public class BookController {
     }
 
     public void renderViewBookByISBNPage(String isbn) {
-        //tryToFindLanguage
-        if (isbn.length() > 10)
-            throw new ISBNNotSupportedRuntimeException("ISBN not supported");
+        Book bookByIsbn = bookService.getBookByIsbn(isbn);
+        System.out.println("<h1>Book by ISBN page</h1><p>" + bookByIsbn + "</p>");
+        System.out.println("<nav>tekwill</nav>");
+    }
 
-        try {
-            Book bookByIsbn = bookService.getBookByIsbn(isbn);
-            System.out.println("<h1>Book by ISBN page</h1><p>" + bookByIsbn + "</p>");
-        } catch (BookNotFoundCheckedException e) {
-//            System.out.println(e.getMessage()); log it at DEBUG level to a file
-            System.out.println("<h1>Book by ISBN page</h1><p>N/A</p>");
-        } finally {
-            System.out.println("<nav>tekwill</nav>");
-        }
+    public void renderViewAllBooks() {
+        System.out.println("<h1>All books</h1><p>");
+        bookService.getAllBooks().forEach(b -> System.out.println(b));
+        System.out.println("</p>");
+        System.out.println("<nav>tekwill</nav>");
+    }
+
+    public void renderMessageAfterBookNameUpdated(String newBookName, Long bookId) {
+        System.out.println("<h1>All books</h1><p>");
+        System.out.println("<div class='alert'> Successfully updated " + bookService.updateBookNameByBookId(newBookName,
+                                                                                                            bookId) + " rows </div>");
+        System.out.println("</p>");
+        System.out.println("<nav>tekwill</nav>");
+    }
+
+    public void renderMessageAfterDeletedBook(Long bookId) {
+        System.out.println("<h1>All books</h1><p>");
+        System.out.println(
+                "<div class='alert'> Successfully deleted " + bookService.deleteBook(bookId) + " rows </div>");
+        System.out.println("</p>");
+        System.out.println("<nav>tekwill</nav>");
+    }
+
+    public void renderMessageAfterSavedBook(Book book) {
+        System.out.println("<h1>All books</h1><p>");
+        System.out.println("<div class='alert'> Successfully saved " + bookService.saveBook(book) + " rows </div>");
+        System.out.println("</p>");
+        System.out.println("<nav>tekwill</nav>");
     }
 }

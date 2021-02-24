@@ -1,10 +1,19 @@
 package book.service;
 
 import book.domain.Book;
-import book.domain.exceptions.BookNotFoundCheckedException;
-import book.domain.exceptions.BookNotFoundRuntimeException;
+
+import java.util.List;
 
 public interface BookService {
-    Book getBookByIsbn(
-            String isbn) throws BookNotFoundRuntimeException, NullPointerException, BookNotFoundCheckedException;
+    Book getBookByIsbn(String isbn);
+
+    List<Book> getAllBooks();
+
+    int updateBookNameByBookId(String newBookName, Long bookId);
+
+    int deleteBook(Long bookId);
+
+    int saveBook(Book book);
+
+
 }
