@@ -2,13 +2,11 @@ package book.controller;
 
 import book.domain.Book;
 import book.service.BookService;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
-
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
-    }
 
     public void renderViewBookByISBNPage(String isbn) {
         Book bookByIsbn = bookService.getBookByIsbn(isbn);

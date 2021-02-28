@@ -1,10 +1,14 @@
 package book.domain;
 
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
+@Data
+@NoArgsConstructor
 public class Book {
     private Long id;
     private String isbn;
@@ -38,79 +42,4 @@ public class Book {
         page.setBook(null);
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public boolean isRare() {
-        return isRare;
-    }
-
-    public void setRare(boolean rare) {
-        isRare = rare;
-    }
-
-    public int getNumberOfPages() {
-        return numberOfPages;
-    }
-
-    public void setNumberOfPages(int numberOfPages) {
-        this.numberOfPages = numberOfPages;
-    }
-
-    public List<Page> getPages() {
-        return pages;
-    }
-
-    public void setPages(List<Page> pages) {
-        this.pages = pages;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Book book = (Book) o;
-        return isRare == book.isRare && numberOfPages == book.numberOfPages && Objects.equals(id,
-                                                                                              book.id) && Objects.equals(
-                isbn, book.isbn) && Objects.equals(name, book.name) && Objects.equals(pages,
-                                                                                      book.pages);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, isbn, name, isRare, numberOfPages, pages);
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", isbn='" + isbn + '\'' +
-                ", name='" + name + '\'' +
-                ", isRare=" + isRare +
-                ", numberOfPages=" + numberOfPages +
-                ", pages=" + pages +
-                '}';
-    }
 }

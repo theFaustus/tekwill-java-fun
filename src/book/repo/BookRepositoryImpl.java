@@ -84,7 +84,7 @@ public class BookRepositoryImpl implements BookRepository {
         List<Book> books = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(DB_URL);
              PreparedStatement st1 = connection.prepareStatement("SELECT * FROM book");
-             PreparedStatement st2 = connection.prepareStatement("select * from page where book_id = ?")) {
+             PreparedStatement st2 = connection.prepareStatement("SELECT * FROM page WHERE book_id = ?")) {
 
             try (ResultSet r = st1.executeQuery()) {
                 while (r.next()) {
@@ -159,10 +159,10 @@ public class BookRepositoryImpl implements BookRepository {
         int result = 0;
         try (Connection connection = DriverManager.getConnection(DB_URL);
              PreparedStatement st1 = connection.prepareStatement(
-                     "insert into book(isbn, name, is_rare, number_of_pages) values (?, ?, ?, ?)",
+                     "INSERT INTO book(isbn, name, is_rare, number_of_pages) VALUES (?, ?, ?, ?)",
                      Statement.RETURN_GENERATED_KEYS);
              PreparedStatement st2 = connection.prepareStatement(
-                     "insert into page(content, page_number, book_id) VALUES (?, ?, ?)")) {
+                     "INSERT INTO page(content, page_number, book_id) VALUES (?, ?, ?)")) {
 
 //            final PreparedStatement st1 = connection.prepareStatement(
 //                    "insert into book(id, isbn, name, is_rare, number_of_pages) values (?, ?, ?, ?, ?)");
